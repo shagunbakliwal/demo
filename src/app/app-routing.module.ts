@@ -5,15 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 const routes: Routes = [
   {
-    path: '',
+    path: 'Home',
     component: HomeComponent
   },
   {
-    path: 'gallery',
+    path: 'Gallery',
     component: GalleryComponent
   },
   {
-    path: 'contactUs',
+    path: 'Contact Us',
     component: ContactUsComponent
   }
 
@@ -23,4 +23,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+}
