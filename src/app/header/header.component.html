@@ -1,4 +1,6 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+
+<nav class="navbar navbar-inverse">
+        <ngx-loading-bar></ngx-loading-bar>
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">{{website}}</a>
@@ -10,12 +12,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <input [(ngModel)]="searchQuery" type="text">
+                <input [(ngModel)]="searchText" type="text" [ngbTypeahead]="search1">
                 <button type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-search" (click)="search()"> Search </span>
+                    <span class="glyphicon glyphicon-search" (click)="startLoading()"> Search </span>
                 </button>
             </li>
         </ul>
     </div>
 </nav>
-<br>
