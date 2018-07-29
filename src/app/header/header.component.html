@@ -1,6 +1,29 @@
+<!-- <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '1608713029348388',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v3.1'
+          });
+            
+          FB.AppEvents.logPageView();   
+            
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
+     -->
+
 
 <nav class="navbar navbar-inverse">
-        <ngx-loading-bar></ngx-loading-bar>
+    <ngx-loading-bar></ngx-loading-bar>
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">{{website}}</a>
@@ -11,12 +34,29 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <input [(ngModel)]="searchText" type="text" [ngbTypeahead]="search1">
+            <!-- <li class="flexContainer">
+                <input type="text" [(ngModel)]="searchText" name="focus" required class="search-box inputField" [ngbTypeahead]="search1" placeholder="Search Here"
+                />
+                <button class="close-icon" type="reset"></button>
                 <button type="button" class="btn btn-default">
                     <span class="glyphicon glyphicon-search" (click)="startLoading()"> Search </span>
                 </button>
-            </li>
+
+            </li> -->
         </ul>
+        <div class="flexContainer">
+            <span class="glyphicon glyphicon-search"></span>
+            <input type="text" [(ngModel)]="searchText" name="focus" required class="inputField search-box" [ngbTypeahead]="search1"
+                placeholder="Search Here">
+            <button type="submit">
+                <img src="../../assets/images/clearIcon.png" width="20px" height="20px" alt="Arrow Icon">
+            </button>
+            <div *ngIf="!user.loggedInUser">
+                <button (click)="socialSignIn('facebook')">Sign in with Facebook</button>
+            </div>
+            <div *ngIf="user.loggedInUser">
+                <span>{{user.loggedInUser.name}}</span>
+            </div>
+        </div>
     </div>
 </nav>

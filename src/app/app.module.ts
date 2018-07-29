@@ -11,6 +11,30 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '../../node_modules/@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { ClearTextFieldComponent } from './components/clear-text-field/clear-text-field.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { StorageServiceModule} from 'angular-webstorage-service';
+
+
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  FacebookLoginProvider
+} from "angular-6-social-login";
+import { MyAccountComponent } from './my-account/my-account.component';
+import { UserService } from './user.service';
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("1608713029348388")
+        },
+      ]);
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -20,15 +44,24 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     GalleryComponent,
     ContactUsComponent,
     FooterComponent,
-    HeaderComponent],
+    HeaderComponent,
+    ClearTextFieldComponent,
+    MyAccountComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule.forRoot(),
-    LoadingBarModule.forRoot()
+    LoadingBarModule.forRoot(),
+    FontAwesomeModule,
+    StorageServiceModule,
+    SocialLoginModule
+
   ],
-  providers: [],
+  providers: [  UserService,{
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

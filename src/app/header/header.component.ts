@@ -1,9 +1,19 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Inject } from '@angular/core';
+
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { Router } from "@angular/router";
+
+
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angular-6-social-login';
+import { UserService } from '../user.service';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'header-component',
@@ -11,7 +21,36 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private loadingBar: LoadingBarService) {
+
+  public data: any = [];
+  website = "PhotoStock";
+  selectedBar = {};
+  navbarsItems: Map<String, String> = new Map;
+  searchText: string = "";
+  tags: Array<String> = [];
+
+  public socialSignIn(socialPlatform: string) {
+    let socialPlatformProvider;
+    if (socialPlatform == "facebook") {
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    } else if (socialPlatform == "google") {
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform + " sign in data : ", userData);
+        this.user.loggedInUser = userData;
+        this.storage.set("user", userData);
+        this.data["user"] = this.storage.get("user");
+        this.router.navigate(['/account']);
+      }
+    );
+  }
+
+
+  constructor(private loadingBar: LoadingBarService, private socialAuthService: AuthService,
+    private router: Router, private user: UserService, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
     this.tags.push('Shagun Bakliwal');
     this.tags.push('Shubham Shrivastava');
     this.tags.push('Prateek Dash');
@@ -26,11 +65,6 @@ export class HeaderComponent implements OnInit {
     this.loadingBar.complete();
   }
 
-  website = "PhotoStock";
-  selectedBar = {};
-  navbarsItems: Map<String, String> = new Map;
-  searchText: string = "";
-  tags: Array<String> = [];
 
 
   ngOnInit() {
