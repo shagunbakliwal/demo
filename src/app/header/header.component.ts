@@ -28,7 +28,11 @@ export class HeaderComponent implements OnInit {
   navbarsItems: Map<String, String> = new Map;
   searchText: string = "";
   tags: Array<String> = [];
-
+  userImage = null;
+  activeUserType = null;
+  male = "https://img.icons8.com/doodle/48/000000/user.png";
+  guest = "https://img.icons8.com/cotton/64/000000/administrator-male-2-1.png";
+  female = "https://img.icons8.com/doodle/48/000000/user-female.png";
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
     if (socialPlatform == "facebook") {
@@ -54,6 +58,8 @@ export class HeaderComponent implements OnInit {
     this.tags.push('Shagun Bakliwal');
     this.tags.push('Shubham Shrivastava');
     this.tags.push('Prateek Dash');
+    this.userImage = this.guest;
+    this.activeUserType = "guest";
   }
   startLoading() {
     this.loadingBar.stop();

@@ -25,5 +25,14 @@
         </div>
       </div>
     </form>
+    <div class="navbar-right">
+      <div *ngIf="activeUserType == 'guest'">
+        <app-guest-user-options></app-guest-user-options>
+      </div>
+      <div *ngIf="activeUserType !== 'guest'">
+        <app-user-options></app-user-options>
+      </div>
+
+    </div>
   </div>
 </nav>
