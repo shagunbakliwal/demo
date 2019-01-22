@@ -23,6 +23,8 @@ import {
   FacebookLoginProvider
 } from "angular-6-social-login";
 import { MyAccountComponent } from './my-account/my-account.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+
 import { UserService } from './user.service';
 import { GuestUserOptionsComponent } from './guest-user-options/guest-user-options.component';
 import { UserOptionsComponent } from './user-options/user-options.component';
@@ -50,6 +52,7 @@ export function getAuthServiceConfigs() {
     HeaderComponent,
     ClearTextFieldComponent,
     MyAccountComponent,
+    SignInComponent,
     GuestUserOptionsComponent,
     UserOptionsComponent,
     DashboardComponent],

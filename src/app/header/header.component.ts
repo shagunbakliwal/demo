@@ -84,7 +84,7 @@ export class HeaderComponent implements OnInit {
     this.selectedBar = item;
   }
 
-  getNavbarItems(item) {
+  getNavbarItems() {
     return Array.from(this.navbarsItems.keys());
   }
 
